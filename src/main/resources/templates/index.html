@@ -15,7 +15,7 @@
                 <div class="card mb-3">
                     <img th:src="'/img/' + ${pelicula.getImagen()}" class="card-img-top" alt="..." height="250px" width="250px">
                     <div class="card-body">
-                        <h5 class="card-title"><a class="card-title" th:href="'/detalle/' +${pelicula.getId()}" th:text="${pelicula.getTitulo()}"></a></h5>
+                        <h5 class="card-title"><a class="card-title" th:href="'/pelicula/' +${pelicula.getId()}" th:text="${pelicula.getTitulo()}"></a></h5>
                         <p th:text="${pelicula.getFecha()}" class="card-text"></p>
                     </div>
                 </div>

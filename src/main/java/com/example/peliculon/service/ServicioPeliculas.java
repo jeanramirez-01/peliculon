@@ -21,15 +21,19 @@ public class ServicioPeliculas {
         return repo.findById(id);
     }
 
-    public Pelicula save(Pelicula p){
+    public ArrayList<Pelicula> findByNacionalidad(String nacionalidad) {
+        return repo.findByNacionalidad(nacionalidad);
+    }
+
+    public Pelicula save(Pelicula p) {
         return repo.save(p);
     }
 
-    public void delete(Pelicula p){
+    public void delete(Pelicula p) {
         repo.delete(p);
     }
 
-    public void deleteById(long id){
+    public void deleteById(long id) {
         repo.deleteById(id);
     }
 }

@@ -30,8 +30,8 @@ public class Pelicula {
     private String imagen;
     @Column(columnDefinition = "TEXT")
     private String trailer;
-//    @OneToMany
-//    private ArrayList<Comentario> comentarios;
+    @OneToMany
+    private ArrayList<Comentario> comentarios = new ArrayList<>();
 
 
 }

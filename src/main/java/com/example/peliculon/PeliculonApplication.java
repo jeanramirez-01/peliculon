@@ -17,7 +17,7 @@ import java.util.Locale;
 public class PeliculonApplication {
 
 	@Autowired
-	ServicioPeliculas servicioPelicula;
+	ServicioPeliculas servicioPeliculas;
 	@Autowired
 	ServicioComentarios servicioComentarios;
 
@@ -29,7 +29,7 @@ public class PeliculonApplication {
 		return args -> {
 
 			Faker faker = new Faker(new Locale("es-ES"));
-			if(servicioPelicula.findAll().size()<5) {
+			if(servicioPeliculas.findAll().size()<5) {
 				for (int i = 0; i < 5; i++) {
 					Pelicula p = new Pelicula();
 					p.setTitulo(faker.book().title());
@@ -37,8 +37,8 @@ public class PeliculonApplication {
 					p.setFecha(LocalDate.now());
 					p.setNacionalidad(faker.country().countryCode2());
 					p.setImagen("pev.jpg");
-					p.setTrailer("-xB9yLQQX64BnegK");
-					servicioPelicula.save(p);
+					p.setTrailer("https://www.youtube.com/embed/0c5wQ82JLy0?si=RdUj-JoEci8Pt9kH");
+					servicioPeliculas.save(p);
 
 					for (int j = 0; j < 3; j++) {
 						Comentario c = new Comentario();

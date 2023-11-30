@@ -1,69 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Detalle</title>
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
+<div class="container">
+    <h1 th:text="${pelicula.titulo}"></h1>
 
-<h1 th:text="${cartelera.getTitulo()}"></h1>
-<p th:text="${cartelera.getSinopsis()}"></p>
-<p th:text="${cartelera.getNacionalidad()}"></p>
-<p th:text="${cartelera.getFecha()}"></p>
-<img th:src="'/img/' + ${cartelera.getImagen()}" style="height: 250px" width="250px">
+    <p th:text="${pelicula.sinopsis}"></p>
+    <p th:text="${pelicula.nacionalidad} + ' - ' + ${pelicula.fecha}"></p>
+    <img th:src="'/img/' + ${pelicula.imagen}">
 
-<iframe width="560" height="315" th:src="'https://www.youtube.com/embed/75zHkAHeOGo?si=' +${cartelera.getTrailer()}"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+    <iframe width="560" height="315" th:src="${pelicula.getTrailer()}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-<div th:each="comentario:${comentarios}">
+    <div th:each="comentario:${comentarios}">
+        <h4 th:text="${comentario.titulo}"></h4>
+        <p th:text="${comentario.fecha}"></p>
+        <p th:text="${comentario.contenido}"></p>
+    </div>
 
-    <div class="row d-flex justify-content-center">
-        <div class="col-md-8 col-lg-6">
-            <div class="card shadow-0 border" style="background-color: #f0f2f5;">
-                <div class="card-body p-4">
-                    <div class="form-outline mb-4">
-                        <input type="text" id="addANote" class="form-control" placeholder="Type comment..."/>
-                        <label class="form-label" for="addANote">+ Add a note</label>
-                    </div>
-
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <p th:text="${comentario.getContenido()}"></p>
-
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-row align-items-center">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar"
-                                         width="25"
-                                         height="25"/>
-                                    <p th:text="${comentario.getTitulo()}"></p>
-                                    <p th:text="${comentario.getFecha()}"></p>
-                                </div>
-                                <div class="d-flex flex-row align-items-center">
-                                    <p class="small text-muted mb-0">Upvote?</p>
-                                    <i class="far fa-thumbs-up mx-2 fa-xs text-black" style="margin-top: -0.16rem;"></i>
-                                    <p class="small text-muted mb-0">3</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+    <form action="/comentario/add" th:object="${nuevoComentario}" method="post">
+        <input type="hidden" name="idPelicula" th:value="${pelicula.id}">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="titulo">Título</label>
+                <input type="text" class="form-control" name="titulo" id="titulo" th:field="*{titulo}" value="Munich" required>
             </div>
         </div>
-    </div>
-
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="contenido"></label>
+                <textarea class="form-control" name="contenido" id="contenido" rows="3" th:field="*{contenido}" required></textarea>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Enviar">
+    </form>
 </div>
 
-<form action="/comentario/add" th:object="${nuevoComentario}" method="post">
-    <div>
-        <label for="titulo">Titulo</label>
-        <input type="text" class="form-control" name="titulo" id="titulo" th:field="*{titulo}" value="Munich">
-    </div>
-</form>
-
-<a href="/">Volver al inicio</a>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>

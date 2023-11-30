@@ -28,7 +28,7 @@
                 <a th:href="'/crud/update/' + ${p.id}" class="btn btn-primary">Modificar</a>
             </td>
             <td>
-                <a th:href="'/crud/delete/' + ${p.id}" class="btn btn-danger">Borrar</a>
+                <a th:href="'/crud/delete/' + ${p.id}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas borrar este elemento?')">Borrar</a>
             </td>
         </tr>
     </table>

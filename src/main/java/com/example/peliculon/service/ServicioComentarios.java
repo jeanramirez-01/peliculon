@@ -13,24 +13,28 @@ public class ServicioComentarios {
 
     @Autowired
     RepositorioComentarios repo;
-    public ArrayList<Comentario> findAll(){
+
+    public ArrayList<Comentario> findAll() {
         return repo.findAll();
     }
-    public Comentario save(Comentario comentario){
+
+    public Comentario save(Comentario comentario) {
         return repo.save(comentario);
     }
-    public Comentario findById(long id){
+
+    public Comentario findById(long id) {
         return repo.findById(id);
     }
-    public ArrayList<Comentario> findByPelicula(Pelicula pelicula){
+
+    public ArrayList<Comentario> findByPelicula(Pelicula pelicula) {
         return repo.findByPelicula(pelicula);
     }
 
-    public void delete(Comentario comentario){
+    public void delete(Comentario comentario) {
         repo.delete(comentario);
     }
 
-    public void deleteById(long id){
+    public void deleteById(long id) {
         repo.deleteById(id);
     }
 

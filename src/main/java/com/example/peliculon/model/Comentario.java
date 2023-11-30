@@ -20,6 +20,6 @@ public class Comentario {
     private String contenido;
     @Temporal(TemporalType.DATE)
     private LocalDate fecha;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Pelicula pelicula;
 }

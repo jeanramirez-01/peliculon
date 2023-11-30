@@ -11,4 +11,6 @@ public interface RepositorioPeliculas extends JpaRepository<Pelicula, Long> {
     public ArrayList<Pelicula> findAll();
     public Pelicula findById(long id);
     public Pelicula save(Pelicula pelicula);
+
+    public ArrayList<Pelicula> findByNacionalidad(String nacionalidad);
 }
