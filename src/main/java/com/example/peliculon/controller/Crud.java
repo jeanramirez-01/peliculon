@@ -37,7 +37,7 @@ public class Crud {
     @GetMapping("/crud/update/{id}")
     public String muestraPelicula(@PathVariable long id, Model model) {
         Pelicula p = serv.findById(id);
-        model.addAttribute("form_pelicula", p);
+        model.addAttribute("formPelicula", p);
         return "form_add";
     }
 
