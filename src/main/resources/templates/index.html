@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Cartelera de películas</title>
+    <link th:replace="components/fragments :: bootstrap_link">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
@@ -37,6 +38,7 @@
 </head>
 
 <body>
+<header th:replace="components/fragments :: header"></header>
 <div class="container mt-4">
     <h1 class="mb-4">Cartelera de películas</h1>
     <div class="row">

@@ -59,5 +59,11 @@ public class Principal {
         return "redirect:/pelicula/" + comentario.getPelicula().getId();
     }
 
+    @GetMapping("/comentario/delete/{id}")
+    public String borrarComentario(@PathVariable long id, Model model) {
+        Comentario p = repoC.findById(id);
+        repoC.delete(p);
+        return "redirect:/pelicula/" +p.getPelicula().getId();
+    }
 
 }

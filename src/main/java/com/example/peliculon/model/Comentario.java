@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -20,7 +21,7 @@ public class Comentario {
     private String titulo;
     @Column(columnDefinition = "TEXT")
     private String contenido;
-    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd/MM/YYYY")
     private LocalDate fecha;
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)

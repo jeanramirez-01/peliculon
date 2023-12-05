@@ -2,16 +2,22 @@ package com.example.peliculon.controller;
 
 import com.example.peliculon.model.Pelicula;
 import com.example.peliculon.service.ServicioPeliculas;
+import com.example.peliculon.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 @Controller
 public class Crud {
 
     @Autowired
     private ServicioPeliculas serv;
+
+    @Autowired
+    public StorageService storageService;
 
     @GetMapping("/crud")
     public String listadoPeliculas(Model model) {
@@ -27,7 +33,15 @@ public class Crud {
     }
 
     @PostMapping("/crud/save")
-    public String guardarPelicula(@ModelAttribute("formPelicula") Pelicula nuevaPelicula) {
+    public String guardarPelicula(@ModelAttribute("formPelicula") Pelicula nuevaPelicula,
+                                  @RequestParam("file") MultipartFile file) {
+
+        if (!file.isEmpty()) {
+            String imagen = storageService.store(file, nuevaPelicula.getTitulo());
+            System.out.println("La imagen a guardar es : " + imagen);
+            nuevaPelicula.setImagen(MvcUriComponentsBuilder
+                    .fromMethodName(FileUploadController.class, "serveFile", imagen).build().toUriString());
+        }
 
         serv.save(nuevaPelicula);
 
@@ -42,7 +56,15 @@ public class Crud {
     }
 
     @PostMapping("/crud/modificar")
-    public String modificarPelicula(@ModelAttribute("formPelicula") Pelicula p) {
+    public String modificarPelicula(@ModelAttribute("formPelicula") Pelicula p,
+                                    @RequestParam("file") MultipartFile file) {
+
+        if (!file.isEmpty()) {
+            String imagen = storageService.store(file, p.getTitulo());
+            System.out.println("La imagen a guardar es : " + imagen);
+            p.setImagen(MvcUriComponentsBuilder
+                    .fromMethodName(FileUploadController.class, "serveFile", imagen).build().toUriString());
+        }
 
         serv.save(p);
 
